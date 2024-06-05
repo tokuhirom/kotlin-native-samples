@@ -18,6 +18,12 @@ export default defineConfig({
         items: [
           { text: 'Kotlin Native で echo-server', link: '/02-sockets/01-echo-server/' },
         ]
+      },
+      {
+        text: "Mac と Kotlin/Native",
+        items: [
+          { text: "Kotlin Native で ScreenCapture を使ってみる", link: "/03-mac/01-screencapturekit/" },
+        ]
       }
     ],
 
