@@ -22,7 +22,7 @@ export default defineConfig({
       {
         text: "Mac と Kotlin/Native",
         items: [
-          { text: "Kotlin Native で ScreenCapture を使ってみる", link: "/03-mac/01-screencapturekit/" },
+          { text: "Kotlin Native で ScreenCaptureKit を使ってみる", link: "/03-mac/01-screencapturekit/" },
         ]
       }
     ],
