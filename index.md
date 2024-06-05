@@ -8,8 +8,8 @@ hero:
   tagline: Kotlin Native の実用方法を徹底解説
   actions:
     - theme: brand
-      text: Hello, world から始める
-      link: /01-basic/01-hello-world/
+      text: echo server から始める
+      link: /02-sockets/01-echo-server/
 
 features:
   - title: システムプログラミングも Kotlin で書こう 
