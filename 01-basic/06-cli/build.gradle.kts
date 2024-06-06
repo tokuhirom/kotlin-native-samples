@@ -12,7 +12,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-cli:0.3.6")
+                implementation("com.github.ajalt.clikt:clikt:4.4.0")
             }
         }
     }

@@ -1,11 +1,16 @@
-import kotlinx.cli.ArgParser
-import kotlinx.cli.ArgType
-import kotlinx.cli.required
+import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.parameters.arguments.argument
+import com.github.ajalt.clikt.parameters.options.option
 
+class Tool : CliktCommand() {
+    val opt: String? by option(help="an option")
+    val arg: String by argument(help="an argument")
+
+    override fun run() {
+        println("opt=$opt, arg=$arg")
+    }
+
+}
 fun main(args: Array<String>) {
-    val parser = ArgParser("example")
-    val input by parser.option(ArgType.String, shortName = "i", description = "Input file")
-        .required()
-    parser.parse(args)
-    println("Input file: $input")
+    Tool().main(args)
 }

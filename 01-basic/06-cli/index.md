@@ -1,7 +1,9 @@
 [# CLI を書いてみる
 
-kotlin 公式が出している kotlinx.cli を使うと、CLI ツールを簡単に書くことができます。
-subcommand にも対応しているので、これを使うのが基本となってくると思います。
+kotlin 公式が出している kotlinx.cli がありましたが、今はもうメンテナンスされていません。
+
+[clikt](https://ajalt.github.io/clikt/) を使うことにします。
+clikt はサブコマンドにも対応しており、機能的には十分と思います。
 
 ## 設定
 
@@ -18,9 +20,12 @@ subcommand にも対応しているので、これを使うのが基本となっ
 自動的に `--help` オプションも設定されます。
 
 ```
-Usage: example options_list
-Options: 
-    --input, -i -> Input file (always required) { String }
-    --help, -h -> Usage info 
-```
+Usage: tool [<options>] <arg>
 
+Options:
+  --opt=<text>  an option
+  -h, --help    Show this message and exit
+
+Arguments:
+  <arg>  an argument
+```
