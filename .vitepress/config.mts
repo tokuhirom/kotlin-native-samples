@@ -14,6 +14,12 @@ export default defineConfig({
 
     sidebar: [
       {
+        text: 'Kotlin/Native の基本',
+        items: [
+          { text: 'Kotlin Native で CLI ツールを作るときは kotlinx.cli 使おう', link: '/01-basic/06-cli/' },
+        ]
+      },
+      {
         text: 'Kotlin/Native とソケット',
         items: [
           { text: 'Kotlin Native で echo-server', link: '/02-sockets/01-echo-server/' },
