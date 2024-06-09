@@ -44,12 +44,12 @@ tasks {
         into("$buildDir/MyKotlinApp.app/Contents/Resources")
     }
 
-    val copyExecutable by creating(Copy::class) {
+    val copyExecutable by creating {
         group = "build"
         description = "Copies the executable to the app bundle"
         dependsOn("linkReleaseExecutableMacApp")
         doLast {
-            val executableFile = file("$buildDir/bin/macosX64/releaseExecutable/02-app.kexe")
+            val executableFile = file("$buildDir/bin/macApp/releaseExecutable/02-app.kexe")
             if (executableFile.exists()) {
                 copy {
                     from(executableFile)
