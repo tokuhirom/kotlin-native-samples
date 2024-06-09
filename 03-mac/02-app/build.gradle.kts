@@ -48,12 +48,18 @@ tasks {
         group = "build"
         description = "Copies the executable to the app bundle"
         dependsOn("linkReleaseExecutableMacApp")
-        from("$buildDir/bin/macosX64/releaseExecutable/macApp.kexe") {
-            into("$buildDir/MyKotlinApp.app/Contents/MacOS")
-            rename { "MyKotlinApp" }
-        }
         doLast {
-            println("Executable copied to: ${file("$buildDir/MyKotlinApp.app/Contents/MacOS/MyKotlinApp").absolutePath}")
+            val executableFile = file("$buildDir/bin/macosX64/releaseExecutable/02-app.kexe")
+            if (executableFile.exists()) {
+                copy {
+                    from(executableFile)
+                    into("$buildDir/MyKotlinApp.app/Contents/MacOS")
+                    rename { "MyKotlinApp" }
+                }
+                println("Executable copied to: ${file("$buildDir/MyKotlinApp.app/Contents/MacOS/MyKotlinApp").absolutePath}")
+            } else {
+                println("Executable not found at: ${executableFile.absolutePath}")
+            }
         }
     }
 

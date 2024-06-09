@@ -1,4 +1,5 @@
-@OptIn(BetaInteropApi::class)
+import platform.CoreFoundation.CFRunLoopRun
+
 fun main() {
     println("Hello, world")
 
