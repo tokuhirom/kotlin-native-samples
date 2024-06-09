@@ -12,25 +12,36 @@ kotlin {
     }
 
     sourceSets {
-        commonMain {
+        val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-io-core:0.3.5")
             }
         }
+        val macAppMain by getting
+        val macAppTest by getting
     }
 }
 
 tasks {
-    val createAppDirStructure by creating(Copy::class) {
+    val createAppDirStructure by creating {
         group = "build"
         description = "Creates the macOS app directory structure"
+        doLast {
+            val appDir = file("$buildDir/MyKotlinApp.app/Contents")
+            appDir.mkdirs()
+            mkdir("$buildDir/MyKotlinApp.app/Contents/MacOS")
+            mkdir("$buildDir/MyKotlinApp.app/Contents/Resources")
+        }
+    }
+
+    val copyResources by creating(Copy::class) {
+        group = "build"
+        description = "Copies resources to the app bundle"
+        dependsOn(createAppDirStructure)
         from("src/macAppMain/resources") {
             include("**/*")
         }
         into("$buildDir/MyKotlinApp.app/Contents/Resources")
-        doLast {
-            mkdir("$buildDir/MyKotlinApp.app/Contents/MacOS")
-        }
     }
 
     val copyExecutable by creating(Copy::class) {
@@ -51,7 +62,6 @@ tasks {
         description = "Generates the Info.plist file"
         dependsOn(createAppDirStructure) // Ensure directory structure is created first
         doLast {
-            mkdir("$buildDir/MyKotlinApp.app/Contents/MacOS")
             val plistFile = file("$buildDir/MyKotlinApp.app/Contents/Info.plist")
             plistFile.writeText(
                 """
@@ -85,7 +95,7 @@ tasks {
     val createMacAppBundle by creating {
         group = "build"
         description = "Creates the macOS app bundle"
-        dependsOn(createAppDirStructure, copyExecutable, generatePlist)
+        dependsOn(createAppDirStructure, copyResources, copyExecutable, generatePlist)
     }
 }
 
