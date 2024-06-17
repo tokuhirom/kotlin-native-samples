@@ -13,7 +13,7 @@ clikt はサブコマンドにも対応しており、機能的には十分と�
 
 ## 実装
 
-<<< ./src/nativeMain/kotlin/Main.kt{kotlin}
+<<< ./src/commonMain/kotlin/Main.kt{kotlin}
 
 非常に簡単に使えるとともに、一通りのパースができるので機能的には十分と思います。
 
