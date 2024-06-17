@@ -16,19 +16,24 @@ fun main() {
     autoreleasepool {
         val app = NSApplication.sharedApplication()
 
-        val appDelegate = object : NSObject(), NSApplicationDelegateProtocol {
-            override fun applicationDidFinishLaunching(notification: NSNotification) {
-                val statusItem = NSStatusBar.systemStatusBar.statusItemWithLength(NSVariableStatusItemLength)
-                statusItem.button?.title = "Hello"
-                val menu = NSMenu().apply {
-                    addItem(NSMenuItem("Quit",
-                        action = NSSelectorFromString("terminate:"),
-                        keyEquivalent = "q")
-                    )
+        val appDelegate =
+            object : NSObject(), NSApplicationDelegateProtocol {
+                override fun applicationDidFinishLaunching(notification: NSNotification) {
+                    val statusItem = NSStatusBar.systemStatusBar.statusItemWithLength(NSVariableStatusItemLength)
+                    statusItem.button?.title = "Hello"
+                    val menu =
+                        NSMenu().apply {
+                            addItem(
+                                NSMenuItem(
+                                    "Quit",
+                                    action = NSSelectorFromString("terminate:"),
+                                    keyEquivalent = "q",
+                                ),
+                            )
+                        }
+                    statusItem.menu = menu
                 }
-                statusItem.menu = menu
             }
-        }
 
         app.delegate = appDelegate
         app.run()
