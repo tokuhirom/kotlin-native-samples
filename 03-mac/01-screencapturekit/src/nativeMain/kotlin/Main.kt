@@ -61,7 +61,12 @@ fun main() {
                 println("Applications:")
                 applications.forEachIndexed { _, application ->
                     if (application is SCRunningApplication) {
-                        println("  ${application.processID.toString().padStart(8, ' ')}:  ${application.bundleIdentifier} ${application.applicationName}")
+                        println(
+                            "  ${application.processID.toString().padStart(
+                                8,
+                                ' ',
+                            )}:  ${application.bundleIdentifier} ${application.applicationName}",
+                        )
                     }
                 }
             }
@@ -73,7 +78,12 @@ fun main() {
                 println("Windows:")
                 windows.forEachIndexed { _, window ->
                     if (window is SCWindow) {
-                        println("  ${window.windowID.toString().padStart(8, ' ')}:  ${window.title} onScreen=${window.onScreen} active=${window.active} ${window.description} ${window.owningApplication?.bundleIdentifier}")
+                        println(
+                            "  ${window.windowID.toString().padStart(
+                                8,
+                                ' ',
+                            )}:  ${window.title} onScreen=${window.onScreen} active=${window.active} ${window.description} ${window.owningApplication?.bundleIdentifier}",
+                        )
                         captureAndSaveWindow(tempDir, window)
                     }
                 }
@@ -88,15 +98,19 @@ fun main() {
 }
 
 @OptIn(ExperimentalForeignApi::class)
-fun captureAndSaveWindow(tempDir: Path, window: SCWindow) {
+fun captureAndSaveWindow(
+    tempDir: Path,
+    window: SCWindow,
+) {
     val windowID = window.windowID
 
-    val image = CGWindowListCreateImage(
-        CGRectNull.readValue(),
-        kCGWindowListOptionIncludingWindow,
-        windowID,
-        kCGWindowImageDefault
-    )
+    val image =
+        CGWindowListCreateImage(
+            CGRectNull.readValue(),
+            kCGWindowListOptionIncludingWindow,
+            windowID,
+            kCGWindowImageDefault,
+        )
 
     if (image == null) {
         println("Failed to capture window: $windowID")
