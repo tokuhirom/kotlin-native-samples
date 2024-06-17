@@ -3,7 +3,17 @@ plugins {
 }
 
 kotlin {
-    macosArm64("native") {
+    macosX64 {
+        binaries {
+            executable()
+        }
+    }
+    macosArm64 {
+        binaries {
+            executable()
+        }
+    }
+    linuxX64 {
         binaries {
             executable()
         }
