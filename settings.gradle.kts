@@ -5,6 +5,7 @@ rootProject.name = "kotlin-native-samples"
 
 include(":01-basic:06-cli")
 include(":01-basic:07-workers")
+include(":01-basic:08-coroutine")
 
 include(":02-sockets:01-echo-server")
 
