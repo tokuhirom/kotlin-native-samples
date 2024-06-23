@@ -16,6 +16,7 @@ export default defineConfig({
       {
         text: 'Kotlin/Native の基本',
         items: [
+          { text: "Kotlin Native のライブラリの探し方", link: "/01-basic/01-libraries-repository/" },
           { text: 'Kotlin Native で CLI ツールを作るときは kotlinx.cli 使おう', link: '/01-basic/06-cli/' },
           { text: 'Kotlin Native でスレッドを使いたいときは、Workers を使う(癖あり)', link: '/01-basic/07-workers/' },
         ]
