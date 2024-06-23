@@ -3,9 +3,18 @@ plugins {
 }
 
 kotlin {
-    macosArm64("native") {
-        binaries {
-            executable()
+    val isAarch64 = System.getProperty("os.arch").contains("aarch64")
+    if (isAarch64) {
+        macosArm64("native") {
+            binaries {
+                executable()
+            }
+        }
+    } else {
+        macosX64("native") {
+            binaries {
+                executable()
+            }
         }
     }
 

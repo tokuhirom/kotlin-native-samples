@@ -16,6 +16,7 @@ import platform.posix.close
 import platform.posix.listen
 import platform.posix.memset
 import platform.posix.perror
+import platform.posix.posix_htons
 import platform.posix.recv
 import platform.posix.send
 import platform.posix.sockaddr_in
@@ -30,14 +31,14 @@ fun main() {
         return
     }
 
-    val port: UShort = 12345u
+    val port: Short = 12345
 
     memScoped {
         val serverAddr = alloc<sockaddr_in>()
         memset(serverAddr.ptr, 0, sizeOf<sockaddr_in>().toULong())
         serverAddr.sin_family = AF_INET.convert()
-        serverAddr.sin_port = htons(port).convert()
-        serverAddr.sin_addr.s_addr = htonl(INADDR_ANY)
+        serverAddr.sin_port = posix_htons(port).toUShort()
+        serverAddr.sin_addr.s_addr = INADDR_ANY
 
         if (bind(serverSocket, serverAddr.ptr.reinterpret(), sizeOf<sockaddr_in>().convert()) == -1) {
             perror("bind")
@@ -83,12 +84,4 @@ fun main() {
     }
 
     close(serverSocket)
-}
-
-fun htons(value: UShort): UShort {
-    return ((value.toInt() shl 8) or (value.toInt() shr 8)).toUShort()
-}
-
-fun htonl(value: UInt): UInt {
-    return ((value shl 24) or ((value and 0xFF00u) shl 8) or ((value and 0xFF0000u) shr 8) or (value shr 24))
 }
