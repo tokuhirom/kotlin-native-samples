@@ -1,5 +1,7 @@
 # echo server を書いてみる
 
+POSIX API を直接利用して、echo server を記述することを考えます。
+
 ## 設定
 
 `build.gradle.kts` に以下のように追記します。
