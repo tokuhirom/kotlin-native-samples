@@ -1,4 +1,9 @@
+import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
+import kotlinx.cinterop.ObjCAction
+import platform.AppKit.NSAlert
+import platform.AppKit.NSAlertFirstButtonReturn
+import platform.AppKit.NSAlertSecondButtonReturn
 import platform.AppKit.NSApplication
 import platform.AppKit.NSApplicationDelegateProtocol
 import platform.AppKit.NSMenu
@@ -15,7 +20,7 @@ class TrayIconHandler {
     private lateinit var statusItem: NSStatusItem
     private lateinit var appDelegate: NSApplicationDelegateProtocol
 
-    @OptIn(ExperimentalForeignApi::class)
+    @OptIn(ExperimentalForeignApi::class, BetaInteropApi::class)
     fun createAppDelegate(): NSApplicationDelegateProtocol {
         appDelegate =
             object : NSObject(), NSApplicationDelegateProtocol {
@@ -26,6 +31,13 @@ class TrayIconHandler {
                         NSMenu().apply {
                             addItem(
                                 NSMenuItem(
+                                    "Show dialog",
+                                    action = NSSelectorFromString("showDialog"),
+                                    keyEquivalent = "s",
+                                ),
+                            )
+                            addItem(
+                                NSMenuItem(
                                     "Quit",
                                     action = NSSelectorFromString("terminate:"),
                                     keyEquivalent = "q",
@@ -33,6 +45,23 @@ class TrayIconHandler {
                             )
                         }
                     statusItem.menu = menu
+                }
+
+                @ObjCAction
+                fun showDialog() {
+                    println("Show dialog")
+                    val alert =
+                        NSAlert().apply {
+                            messageText = "Alert Dialog"
+                            informativeText = "This is an example of an alert dialog in Kotlin/Native for macOS."
+                            addButtonWithTitle("OK")
+                            addButtonWithTitle("Cancel")
+                        }
+                    val response = alert.runModal()
+                    when (response) {
+                        NSAlertFirstButtonReturn -> println("OK clicked")
+                        NSAlertSecondButtonReturn -> println("Cancel clicked")
+                    }
                 }
             }
         return appDelegate
