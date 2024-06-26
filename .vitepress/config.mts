@@ -31,6 +31,7 @@ export default defineConfig({
         text: "Mac と Kotlin/Native",
         items: [
           { text: "Kotlin Native で ScreenCaptureKit を使ってみる", link: "/03-mac/01-screencapturekit/" },
+          { text: "Tray Icon を表示するアプリケーションを作る", link: "/03-mac/03-trayicon/" },
         ]
       }
     ],
