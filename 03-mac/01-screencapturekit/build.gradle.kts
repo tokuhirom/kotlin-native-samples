@@ -12,7 +12,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-io-core:0.5.4")
+                implementation("org.jetbrains.kotlinx:kotlinx-io-core:0.6.0")
             }
         }
     }
